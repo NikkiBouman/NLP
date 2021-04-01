@@ -29,7 +29,7 @@ print(len(ts))
 # #for all types
 for x in types:
     # over the whole dataframe
-    for i in range(2000): #len(ts)
+    for i in range(2000, 4000): #len(ts)
         # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
         name = re.search(x + '\[([^]]+)\]', ts.iloc[i,0])
         # familyFriendly is boolean, so we should create a matching string
