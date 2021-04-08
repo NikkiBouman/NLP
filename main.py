@@ -40,6 +40,7 @@ else:
 
 teacher_forcing_ratio = -1  # TODO: For now it is turned off
 MAX_LENGTH = 80
+
 SOS_token = 0
 EOS_token = 1
 
@@ -116,8 +117,10 @@ def trainIters(encoder, decoder, print_every=1000, plot_every=100, learning_rate
 
     for iter in range(1, n_iters + 1):
         # training_pair = training_pairs[iter - 1]
-        input_tensor = hot_encode(mr_lang, input[iter-1])
+        input_tensor = hot_encode(mr_lang, input[iter-1].append(EOS_token))
+        print(input_tensor)
         # print(input_tensor)
+
         target_tensor = hot_encode(nl_lang, target[iter-1])
         # print(target_tensor)
 
@@ -152,10 +155,13 @@ def trainIters(encoder, decoder, print_every=1000, plot_every=100, learning_rate
 #     return (input_tensor, target_tensor)
 
 def hot_encode(lang, sentence):
+    print(sentence)
+    print(lang)
     encoding = torch.zeros(len(sentence), lang.n_words)
     for idx, val in enumerate(sentence):
         encoding[idx][val] = 1
 
+    print(encoding)
     return encoding
 
 

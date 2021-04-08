@@ -16,7 +16,7 @@ def get_output_data(file):
 
     natural_lang = Language()
     natural_lang.readLang(lang_df)
-    corpus_df['ref'] = corpus_df['ref'].astype(str) + ' eos'
+    # corpus_df['ref'] = corpus_df['ref'].astype(str) + ' eos'
     corpus_df['ref'] = corpus_df['ref'].apply(lambda x: normalizeString(x))
     corpus_df['ref'] = corpus_df['ref'].apply(lambda x: indexesFromSentence(natural_lang, x))
 
@@ -28,7 +28,7 @@ def get_input_data(file):
 
     mr_lang = MRLanguage()
     mr_lang.readLang(corpus_df['mr'])
-    corpus_df['mr'] = corpus_df['mr'].astype(str) + ', eos'
+    # corpus_df['mr'] = corpus_df['mr'].astype(str) + ', eos'
     corpus_df['mr'] = corpus_df['mr'].apply(lambda x: normalizeMRString(x))
     corpus_df['mr'] = corpus_df['mr'].apply(lambda x: indexesFromSentence(mr_lang, x, delimeter=", "))
 
