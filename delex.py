@@ -17,8 +17,6 @@ texts = trainset.iloc[:,1]
 
 # create empty dataframe
 d = {}
-a = pd.DataFrame(data=annotations)
-t = pd.DataFrame(data=texts)
 ts = pd.DataFrame(data=trainset)
 
 #types = ["name", "priceRange", "near", "customer rating"]
@@ -29,7 +27,7 @@ print(len(ts))
 # #for all types
 for x in types:
     # over the whole dataframe
-    for i in range(2000, 4000): #len(ts)
+    for i in range(5): #len(ts)
         # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
         name = re.search(x + '\[([^]]+)\]', ts.iloc[i,0])
         # familyFriendly is boolean, so we should create a matching string
@@ -67,24 +65,3 @@ for x in types:
             # replace the value in between brackets in the mr
             ts.iloc[i,0] = re.sub(str(name), x + "_x", ts.iloc[i,0], flags=re.IGNORECASE, count=1)
 ts.to_csv(r'delexicalized\delex.csv')
-
-# # #word="pub"
-# x=0
-# word = "5"
-# e = len(word) - len(word.split())
-# print(ts.iloc[x,1])
-# name = regex.search(r"(?i)(?:" + word + ")", ts.iloc[x,1])
-# if name:
-#     print("name: " +  str(name.group(0)))
-# else:
-#     name = regex.search(r"(?b)(?i)(?:\w+" + word + "\w+){e<=" + str(e) + "}", ts.iloc[x,1])
-#     #name = re.search("\w*more than £30\w*", ts.iloc[0,1])
-#     print(name)
-#     print(name.group(0))
-# #
-# string = "5 5"
-# string_ints = [int(s) for s in string.split() if s.isdigit()]
-# string_ints = set(string_ints)
-# string_ints = [str(i) for i in string_ints]
-# print(" ".join(string_ints))
-# # #print(re.findall(r'[0-9]+', str))
