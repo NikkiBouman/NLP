@@ -2,14 +2,6 @@ import pandas as pd
 import re
 import regex
 
-
-# replacing the values of the attributes with placeholders
-
-# de-lexicalized the values of the attributes which seem to take a value from an open set of values
-# name, price range, customer rating, near
-
-#  price range and customer rating is more challenging than the others because both attributes have more value variations in the meaning representations and the natural language texts than the other attributes do
-
 # locate trainset and annotations
 trainset = pd.read_csv("e2e-dataset/trainset.csv")
 annotations = trainset.iloc[:,0]
@@ -24,10 +16,8 @@ types = ["name", "eatType", "familyFriendly", "priceRange", "food", "near", "are
 
 print(len(ts))
 
-# #for all types
-for x in types:
-    # over the whole dataframe
-    for i in range(5): #len(ts)
+for i in range(1): #len(ts)
+    for x in types:
         # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
         name = re.search(x + '\[([^]]+)\]', ts.iloc[i,0])
         # familyFriendly is boolean, so we should create a matching string
@@ -46,7 +36,7 @@ for x in types:
                     found_numbers = regex.search(r"(?i)(?:"+ numbers +")", ts.iloc[i, 1])
                     if found_numbers:
                         name = numbers
-
+            # find matching word, include letters after word (e.g. searching "high" in "highly" should return whole "highly", not just "high")
             found_name = regex.search(r"(?i)(?:"+ name +")", ts.iloc[i, 1])
             # replace that best match
             if found_name:
