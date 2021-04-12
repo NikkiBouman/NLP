@@ -2,19 +2,11 @@ import pandas as pd
 import re
 import regex
 
-# locate trainset and annotations
 trainset = pd.read_csv("e2e-dataset/trainset.csv")
-annotations = trainset.iloc[:,0]
-texts = trainset.iloc[:,1]
-
-# create empty dataframe
 d = {}
 ts = pd.DataFrame(data=trainset)
 
-#types = ["name", "priceRange", "near", "customer rating"]
 types = ["name", "eatType", "familyFriendly", "priceRange", "food", "near", "area", "customer rating"]
-
-print(len(ts))
 
 for i in range(1): #len(ts)
     for x in types:
@@ -41,7 +33,7 @@ for i in range(1): #len(ts)
             # replace that best match
             if found_name:
                 found_name = found_name.group(0)
-                ts.iloc[i,1] = re.sub(str(found_name), x + "_x", ts.iloc[i,1], flags=re.IGNORECASE, count=1)
+                ts.iloc[i, 1] = re.sub(str(found_name), x + "_x", ts.iloc[i, 1], flags=re.IGNORECASE, count=1)
             else:
                 # look for the best match in the ref (e.g. for priceRange: £20-25, £20-£25 is also fine)
                 # ?b: best match with error {e<=x}
