@@ -38,7 +38,7 @@ print(len(ts))
 # #for all types
 for x in types:
     # over the whole dataframe
-    for i in range(3000,3010): #len(ts)
+    for i in range(8000,10000): #len(ts)
         signal.alarm(15)
         try:
             # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
@@ -83,4 +83,4 @@ for x in types:
             continue
         # print(ts.iloc[[i]])
 
-ts.to_csv(r'delexicalized/delex4.csv')
+ts.to_csv(r'delexicalized/delex_8000_10000.csv')

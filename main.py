@@ -1,3 +1,6 @@
+##### THIS FILE IS NOT USED -> THE NOTEBOOK IS USED TO RUN THE MODEL!
+
+
 import time
 import matplotlib.pyplot as plt
 from numpy import math
