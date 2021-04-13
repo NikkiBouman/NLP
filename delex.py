@@ -27,14 +27,14 @@ ts = pd.DataFrame(data=trainset)
 
 types = ["name", "eatType", "familyFriendly", "priceRange", "food", "near", "area", "customer rating"]
 
-for i in range(1): #len(ts)
-    for x in types:
-        # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
-        name = re.search(x + '\[([^]]+)\]', ts.iloc[i,0])
-        # familyFriendly is boolean, so we should create a matching string
-        # customer rating is not always the whole string but just numbers, so first try to find it on numbers
-        signal.alarm(10)
-        try:
+for i in range(1,20): #len(ts)
+    signal.alarm(15)
+    try:
+        for x in types:
+            # store the mr value in between brackets (e.g. for type name: name["The Vaults"] => "The Vaults")
+            name = re.search(x + '\[([^]]+)\]', ts.iloc[i,0])
+            # familyFriendly is boolean, so we should create a matching string
+            # customer rating is not always the whole string but just numbers, so first try to find it on numbers
             if name:
                 name = name.group(1)
                 if x == "familyFriendly":
@@ -77,9 +77,9 @@ for i in range(1): #len(ts)
                             ts.iloc[i, 1] = re.sub(str(found_name), x + "_x", ts.iloc[i, 1], flags=re.IGNORECASE, count=1)
                     # replace the value in between brackets in the mr
                     ts.iloc[i,0] = re.sub(str(name), x + "_x", ts.iloc[i,0], flags=re.IGNORECASE, count=1)
-        except Exception:
-            print("took too long", i)
-            ts.iloc[i,1] = "XXX"
-            continue
+    except Exception:
+        print("took too long", i)
+        ts.iloc[i,1] = "XXX"
+        continue
 
-ts.to_csv(r'delexicalized/delex3.csv')
+ts.to_csv(r'delexicalized/delex4.csv')
